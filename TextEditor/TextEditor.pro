@@ -19,4 +19,4 @@ SOURCES += main.cpp\
 HEADERS  += editor.h \
     showwidget.h
 
-FORMS    += editor.ui
+FORMS    +=
