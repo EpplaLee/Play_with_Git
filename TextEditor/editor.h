@@ -15,9 +15,7 @@
 #include<QTextCharFormat>
 #include<showwidget.h>
 
-namespace Ui {
-class Editor;
-}
+
 
 class Editor : public QMainWindow
 {
@@ -33,7 +31,7 @@ public:
     void mergeFormat(QTextCharFormat);
 
 private:
-    Ui::Editor *ui;
+
     QMenu *fileMenu;
     QMenu *zoomMenu;
     QMenu *rotateMenu;

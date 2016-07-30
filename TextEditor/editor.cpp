@@ -9,8 +9,8 @@ Editor::Editor(QWidget *parent) :
     showWidget = new ShowWidget(this);
     setCentralWidget(showWidget);
     createActions();
-    //createMenus();
-   // createToolBars();
+    createMenus();
+    createToolBars();
     if(img.load("image.png"))
     {
         showWidget->imageLabel->setPixmap(QPixmap::fromImage(img));
@@ -22,7 +22,7 @@ Editor::Editor(QWidget *parent) :
 
 Editor::~Editor()
 {
-    delete ui;
+
 }
 
 
@@ -92,3 +92,68 @@ void Editor::createActions()
      connect(redoAction,SIGNAL(triggered()),showWidget->text,SLOT(redo()));
 
 }
+
+void Editor::createMenus()
+{
+    fileMenu = menuBar()->addMenu(tr("文件"));
+    fileMenu->addAction(openFileAction);
+    fileMenu->addAction(NewFileAction);
+    fileMenu->addAction(PrintTextAction);
+    fileMenu->addAction(PrintImageAction);
+    fileMenu->addSeparator();
+    fileMenu->addAction(exitAction);
+
+    zoomMenu = menuBar()->addMenu(tr("编辑"));
+    zoomMenu->addAction(copyAction);
+    zoomMenu->addAction(cutAction);
+    zoomMenu->addAction(pasteAction);
+    zoomMenu->addAction(aboutAction);
+    zoomMenu->addSeparator();
+    zoomMenu->addAction(zoomInAction);
+    zoomMenu->addAction(zoomOutAction);
+
+    rotateMenu = menuBar()->addMenu(tr("旋转"));
+    rotateMenu->addAction(rotate90Action);
+    rotateMenu->addAction(rotate180Action);
+    rotateMenu->addAction(rotate270Action);
+
+    mirrorMenu = menuBar()->addMenu(tr("镜像"));
+    mirrorMenu->addAction(mirrorVerticalAction);
+    mirrorMenu->addAction(mirrorHorizontalAction);
+}
+
+
+
+
+void Editor::createToolBars()
+{
+    fileTool = addToolBar("File");
+    fileTool->addAction(openFileAction);
+    fileTool->addAction(NewFileAction);
+    fileTool->addAction(PrintTextAction);
+    fileTool->addAction(PrintImageAction);
+
+    zoomTool = addToolBar("Edit");
+    zoomTool->addAction(copyAction);
+    zoomTool->addAction(cutAction);
+    zoomTool->addAction(pasteAction);
+    zoomTool->addSeparator();
+    zoomTool->addAction(zoomInAction);
+    zoomTool->addAction(zoomOutAction);
+
+    rotateTool = addToolBar("rotate");
+    rotateTool->addAction(rotate90Action);
+    rotateTool->addAction(rotate180Action);
+    rotateTool->addAction(rotate270Action);
+
+    doToolBar = addToolBar("doEdit");
+    doToolBar->addAction(undoAction);
+    doToolBar->addAction(redoAction);
+
+    fileTool->setAllowedAreas(Qt::TopToolBarArea|Qt::LeftToolBarArea);
+    fileTool->setMovable(false);
+
+}
+
+
+
